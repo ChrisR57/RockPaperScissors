@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static final int ROCK = 0;
-    private static final int PAPER = 1;
-    private static final int SCISSORS = 2;
+    private static final int ROCK = 0;      //beats SCISSORS    (SCISSORS +1) % 3 = 0
+    private static final int PAPER = 1;     //beats ROCK        (ROCK +1) % 3 = 1
+    private static final int SCISSORS = 2;  //beats PAPER       (PAPER +1) % 3 = 22
 
     private static Scanner scanner = new Scanner(System.in);
 
@@ -24,7 +24,9 @@ public class Main {
             computerChoice = "rock";
         } else if (computerValue == PAPER) {
             computerChoice = "paper";
-        } else { computerChoice = "scissors"; }
+        } else {
+            computerChoice = "scissors";
+        }
 
         do {
             System.out.println("Please enter rock, paper or scissors ");
@@ -43,13 +45,14 @@ public class Main {
             System.out.printf("Computer chose %s, player chose %s. %n", computerChoice, playerChoice);
             if (playerValue == computerValue) {
                 System.out.println("It's a draw");
-            } else if ((playerValue - 1 == computerValue)
-                    || (playerValue == ROCK && computerValue == SCISSORS)) {
+//            } else if ((playerValue - 1 == computerValue)
+//                    || (playerValue == ROCK && computerValue == SCISSORS)) {
+            } else if (playerValue == (computerValue + 1) % 3) {
                 System.out.println("Player wins");
             } else {
                 System.out.println("Computer wins");
             }
-        }   while (getYesOrNo("Would you like to play again? Enter Y or N")) ;
+        } while (getYesOrNo("Would you like to play again? Enter Y or N"));
 
         scanner.close();
     }
